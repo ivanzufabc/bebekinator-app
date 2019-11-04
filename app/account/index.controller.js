@@ -12,13 +12,16 @@
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
 
-        initController();
+        initUser();
 
-        function initController() {
-            // get current user
-            UserService.GetCurrent().then(function (user) {
-                vm.user = user;
+        function initUser() {
+            // get current user data in the API
+            UserService.GetUserId().then(function (userId) {
+                UserService.GetCurrent(userId).then(function (user) {
+                        vm.user = user;
+                    });
             });
+            
         }
 
         function saveUser() {
